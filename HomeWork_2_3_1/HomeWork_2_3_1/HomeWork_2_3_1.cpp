@@ -63,8 +63,7 @@ int main()
     std::ofstream fout;
     fout.open("out.txt");
     fout << ROWS << std::endl;
-    Address mas[3];
-    
+    Address* mas = new Address[ROWS]();
     for (int i = 0; i < ROWS; ++i) {
         fin >> tmp_city;
         fin >> tmp_street;
@@ -77,6 +76,7 @@ int main()
     }
     fin.close();
     fout.close();
+    delete[] mas;
     return 0;
 }
 
