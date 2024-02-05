@@ -73,45 +73,33 @@ public:
     }
 };
 
-class Triangle_C90 : public Figure, public Triangle_common
+class Triangle_C90 : public Triangle_common
 {
 public:
-    Triangle_C90(unsigned int side_a, unsigned int side_b, unsigned int side_c, unsigned int corner_A, unsigned int corner_B) : Figure(3, "Прямоугольный треугольник")
+    Triangle_C90(unsigned int side_a, unsigned int side_b, unsigned int side_c, unsigned int corner_A, unsigned int corner_B) : Triangle_common(side_a, side_b, side_c, corner_A, corner_B, 90)
     {
-        this->side_a = side_a;
-        this->side_b = side_b;
-        this->side_c = side_c;
-        this->corner_A = corner_A;
-        this->corner_B = corner_B;
-        corner_C = 90;
+        sides_count = 3;
+        name = "Прямоугольный треугольник";
     }
 };
 
-class Triangle_acAC : public Figure, public Triangle_common
+class Triangle_acAC : public Triangle_common
 {
 public:
-    Triangle_acAC(unsigned int side_a, unsigned int side_b, unsigned int corner_A, unsigned int corner_B) : Figure(3, "Равнобедренный треугольник")
+    Triangle_acAC(unsigned int side_a, unsigned int side_b, unsigned int corner_A, unsigned int corner_B) : Triangle_common(side_a, side_b, side_a, corner_A, corner_B, corner_A)
     {
-        this->side_a = side_a;
-        this->side_b = side_b;
-        this->side_c = side_a;
-        this->corner_A = corner_A;
-        this->corner_B = corner_B;
-        this->corner_C = corner_A;
+        sides_count = 3;
+        name = "Равнобедренный треугольник";
     }
 };
 
-class Triangle_C606060 : public Figure, public Triangle_common
+class Triangle_C606060 : public Triangle_common
 {
 public:
-    Triangle_C606060(unsigned int side_a) : Figure(3, "Равносторонний треугольник")
+    Triangle_C606060(unsigned int side_a) : Triangle_common(side_a,side_a,side_a,60,60,60)
     {
-        this->side_a = side_a;
-        this->side_b = side_a;
-        this->side_c = side_a;
-        corner_A = 60;
-        corner_B = 60;
-        corner_C = 60;
+        sides_count = 3;
+        name = "Равносторонний треугольник";
     }
 };
 
@@ -166,6 +154,58 @@ public:
     }
 };
 
+class Quadrangle_ababABAB : public Quadrangle_common
+{
+public:
+    Quadrangle_ababABAB(unsigned int side_a, unsigned int side_b, unsigned int corner_A, unsigned int corner_B) : Quadrangle_common(side_a, side_b, side_a, side_b, corner_A, corner_B, corner_A, corner_B)
+    {
+        sides_count = 4;
+        name = "Параллелограмм";
+    }
+};
+
+class Quadrangle_abab90 : public Quadrangle_ababABAB
+{
+public:
+    Quadrangle_abab90(unsigned int side_a, unsigned int side_b) : Quadrangle_ababABAB (side_a, side_b, 90,90)
+    {
+        sides_count = 4;
+        name = "Прямоугольник";
+    }
+};
+
+class Quadrangle_aABAB : public Quadrangle_ababABAB
+{
+public:
+    Quadrangle_aABAB(unsigned int side_a, unsigned int corner_A, unsigned int corner_B) : Quadrangle_ababABAB(side_a, side_a, corner_A, corner_B)
+    {
+        sides_count = 4;
+        name = "Ромб";
+    }
+};
+
+class Quadrangle_a90 : public Quadrangle_aABAB
+{
+public:
+    Quadrangle_a90(unsigned int side_a) : Quadrangle_aABAB(side_a, 90, 90)
+    {
+        sides_count = 4;
+        name = "Квадрат";
+    }
+};
+
+void print_info_triangle(Triangle_common triangle) {
+    std::cout << triangle.Figure::get_name() << " (сторон -  " << triangle.Figure::get_sides_count() << "):" << std::endl;
+    std::cout << "Стороны: a=" << triangle.get_side_a() << " b=" << triangle.get_side_b() << " c=" << triangle.get_side_c() << std::endl;
+    std::cout << "Углы: A=" << triangle.get_corner_A() << " B=" << triangle.get_corner_B() << " C=" << triangle.get_corner_C() << std::endl << std::endl;
+};
+
+void print_info_quadrangle(Quadrangle_common quadrangle) {
+    std::cout << quadrangle.Figure::get_name() << " (сторон -  " << quadrangle.Figure::get_sides_count() << "):" << std::endl;
+    std::cout << "Стороны: a=" << quadrangle.get_side_a() << " b=" << quadrangle.get_side_b() << " c=" << quadrangle.get_side_c() << " d=" << quadrangle.get_side_d() << std::endl;
+    std::cout << "Углы: A=" << quadrangle.get_corner_A() << " B=" << quadrangle.get_corner_B() << " C=" << quadrangle.get_corner_C() << " D=" << quadrangle.get_corner_D() << std::endl << std::endl;
+};
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -174,36 +214,39 @@ int main()
 
     //Создается обычный треугольник    
     Triangle_common fig2(10,20,30,50,60,70);
-    std::cout << fig2.Figure::get_name() << " (сторон -  " << fig2.Figure::get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << fig2.get_side_a() << " b=" << fig2.get_side_b() << " c=" << fig2.get_side_c() << std::endl;
-    std::cout << "Углы: A=" << fig2.get_corner_A() << " B=" << fig2.get_corner_B() << " C=" << fig2.get_corner_C() << std::endl << std::endl;
+    print_info_triangle(fig2);
     
     //Создается прямоугольный треугольник   
     Triangle_C90 fig3(10,20,30,50,60);
-    std::cout << fig3.Figure::get_name() << " (сторон -  " << fig3.Figure:: get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << fig3.get_side_a() << " b=" << fig3.get_side_b() << " c=" << fig3.get_side_c() << std::endl;
-    std::cout << "Углы: A=" << fig3.get_corner_A() << " B=" << fig3.get_corner_B() << " C=" << fig3.get_corner_C() << std::endl << std::endl;
-    
+    print_info_triangle(fig3);
+     
     //Создается равнобедренный треугольник   
     Triangle_acAC fig4(10, 20, 50, 60);
-    std::cout << fig4.Figure::get_name() << " (сторон -  " << fig4.Figure::get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << fig4.get_side_a() << " b=" << fig4.get_side_b() << " c=" << fig4.get_side_c() << std::endl;
-    std::cout << "Углы: A=" << fig4.get_corner_A() << " B=" << fig4.get_corner_B() << " C=" << fig4.get_corner_C() << std::endl << std::endl;
-
+    print_info_triangle(fig4);
+    
     // Создается равносторонний треугольник
     Triangle_C606060 fig5(30);
-    std::cout << fig5.Figure::get_name() << " (сторон -  " << fig5.Figure::get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << fig5.get_side_a() << " b=" << fig5.get_side_b() << " c=" << fig5.get_side_c() << std::endl;
-    std::cout << "Углы: A=" << fig5.get_corner_A() << " B=" << fig5.get_corner_B() << " C=" << fig5.get_corner_C() << std::endl << std::endl;
-
+    print_info_triangle(fig5);
+    
     //Создается обычный четырехугольник    
     Quadrangle_common fig6(10, 20, 30, 40, 50, 60, 70, 80);
-    std::cout << fig6.Figure::get_name() << " (сторон -  " << fig6.Figure::get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << fig6.get_side_a() << " b=" << fig6.get_side_b() << " c=" << fig6.get_side_c() << " d=" << fig6.get_side_d() << std::endl;
-    std::cout << "Углы: A=" << fig6.get_corner_A() << " B=" << fig6.get_corner_B() << " C=" << fig6.get_corner_C() << " D=" << fig6.get_corner_D() << std::endl << std::endl;
-
-
+    print_info_quadrangle(fig6);
     
+    //Создается параллелограмм
+    Quadrangle_ababABAB fig7(20, 30, 30, 40);
+    print_info_quadrangle(fig7);
+    
+    //Создается прямоугольник
+    Quadrangle_abab90 fig8(10, 20);
+    print_info_quadrangle(fig8);
+    
+    //Создается ромб
+    Quadrangle_aABAB fig9(30, 30, 40);
+    print_info_quadrangle(fig9);
+    
+    //Создается квадрат
+    Quadrangle_a90 fig10(20);
+    print_info_quadrangle(fig10);
     
     
     return 0;
