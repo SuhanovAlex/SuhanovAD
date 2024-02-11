@@ -18,6 +18,10 @@ public:
         return name;
     };
 
+    virtual void print_info() {
+        std::cout << get_name() << " (сторон -  " << get_sides_count() << "):" << std::endl;
+    };
+
     Figure() {
         sides_count = 0;
         name = "Фигура";
@@ -59,6 +63,12 @@ public:
     };
     unsigned int get_corner_C() {
         return corner_C;
+    };
+    void print_info() override {
+        Figure::print_info();
+        std::cout << "Стороны: a=" << get_side_a() << " b=" << get_side_b() << " c=" << get_side_c() << std::endl;
+        std::cout << "Углы: A=" << get_corner_A() << " B=" << get_corner_B() << " C=" << get_corner_C() << std::endl << std::endl;
+
     };
     Triangle_common() : Figure(3, "Треугольник")
     {};
@@ -139,6 +149,12 @@ public:
     unsigned int get_corner_D() {
         return corner_D;
     };
+    void print_info() override {
+        Figure::print_info();
+        std::cout << "Стороны: a=" << get_side_a() << " b=" << get_side_b() << " c=" << get_side_c() << " d=" << get_side_d() << std::endl;
+        std::cout << "Углы: A=" << get_corner_A() << " B=" << get_corner_B() << " C=" << get_corner_C() << " D=" << get_corner_D() << std::endl << std::endl;
+
+    };
     Quadrangle_common() : Figure(4, "Четырехугольник")
     {}
     Quadrangle_common(unsigned int side_a, unsigned int side_b, unsigned int side_c, unsigned int side_d, unsigned int corner_A, unsigned int corner_B, unsigned int corner_C, unsigned int corner_D) : Figure(4, "Четырехугольник")
@@ -194,16 +210,8 @@ public:
     }
 };
 
-void print_info_triangle(Triangle_common triangle) {
-    std::cout << triangle.Figure::get_name() << " (сторон -  " << triangle.Figure::get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << triangle.get_side_a() << " b=" << triangle.get_side_b() << " c=" << triangle.get_side_c() << std::endl;
-    std::cout << "Углы: A=" << triangle.get_corner_A() << " B=" << triangle.get_corner_B() << " C=" << triangle.get_corner_C() << std::endl << std::endl;
-};
-
-void print_info_quadrangle(Quadrangle_common quadrangle) {
-    std::cout << quadrangle.Figure::get_name() << " (сторон -  " << quadrangle.Figure::get_sides_count() << "):" << std::endl;
-    std::cout << "Стороны: a=" << quadrangle.get_side_a() << " b=" << quadrangle.get_side_b() << " c=" << quadrangle.get_side_c() << " d=" << quadrangle.get_side_d() << std::endl;
-    std::cout << "Углы: A=" << quadrangle.get_corner_A() << " B=" << quadrangle.get_corner_B() << " C=" << quadrangle.get_corner_C() << " D=" << quadrangle.get_corner_D() << std::endl << std::endl;
+void print_info(Figure* figure) {
+    figure->print_info();
 };
 
 int main()
@@ -212,41 +220,51 @@ int main()
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
 
+
     //Создается обычный треугольник    
     Triangle_common fig2(10,20,30,50,60,70);
-    print_info_triangle(fig2);
+    Figure* p_fig2 = &fig2;
+    print_info(p_fig2);
     
     //Создается прямоугольный треугольник   
     Triangle_C90 fig3(10,20,30,50,60);
-    print_info_triangle(fig3);
+    Figure* p_fig3 = &fig3;
+    print_info(p_fig3);
      
     //Создается равнобедренный треугольник   
     Triangle_acAC fig4(10, 20, 50, 60);
-    print_info_triangle(fig4);
+    Figure* p_fig4 = &fig4;
+    print_info(p_fig4);
     
     // Создается равносторонний треугольник
     Triangle_C606060 fig5(30);
-    print_info_triangle(fig5);
+    Figure* p_fig5 = &fig5;
+    print_info(p_fig5);
     
     //Создается обычный четырехугольник    
     Quadrangle_common fig6(10, 20, 30, 40, 50, 60, 70, 80);
-    print_info_quadrangle(fig6);
+    Figure* p_fig6 = &fig6;
+    print_info(p_fig6);
     
     //Создается параллелограмм
     Quadrangle_ababABAB fig7(20, 30, 30, 40);
-    print_info_quadrangle(fig7);
+    Figure* p_fig7 = &fig7;
+    print_info(p_fig7);
     
     //Создается прямоугольник
     Quadrangle_abab90 fig8(10, 20);
-    print_info_quadrangle(fig8);
+    Figure* p_fig8 = &fig8;
+    print_info(p_fig8);
     
     //Создается ромб
     Quadrangle_aABAB fig9(30, 30, 40);
-    print_info_quadrangle(fig9);
+    Figure* p_fig9 = &fig9;
+    print_info(p_fig9);
     
     //Создается квадрат
     Quadrangle_a90 fig10(20);
-    print_info_quadrangle(fig10);
+    Figure* p_fig10 = &fig10;
+    print_info(p_fig10);
     
     
     return 0;
