@@ -2,117 +2,15 @@
 
 #include "Figure.h"
 #include "Triangle_common.h"
+#include "Triangle_C90.h"
+#include "Triangle_acAC.h"
+#include "Triangle_C606060.h"
 #include "Quadrangle_common.h"
+#include "Quadrangle_ababABAB.h"
+#include "Quadrangle_abab90.h"
+#include "Quadrangle_aABAB.h"
+#include "Quadrangle_a90.h"
 #include <Windows.h>
-
-
-
-
-
-class Triangle_C90 : public Triangle_common
-{
-public:
-    Triangle_C90(unsigned int side_a, unsigned int side_b, unsigned int side_c, unsigned int corner_A, unsigned int corner_B) : Triangle_common(side_a, side_b, side_c, corner_A, corner_B, 90)
-    {
-        sides_count = 3;
-        name = "Прямоугольный треугольник";
-    }
-
-    bool check() override {
-        if (!Triangle_common::check() || (corner_A == 90) || (corner_B == 90)) return false;
-        else return true;
-    };
-};
-
-class Triangle_acAC : public Triangle_common
-{
-public:
-    Triangle_acAC(unsigned int side_a, unsigned int side_b, unsigned int corner_A, unsigned int corner_B) : Triangle_common(side_a, side_b, side_a, corner_A, corner_B, corner_A)
-    {
-        sides_count = 3;
-        name = "Равнобедренный треугольник";
-    }
-
-    bool check() override {
-        if (!Triangle_common::check() || (side_a == side_b) || (corner_A == corner_B)) return false;
-        else return true;
-    };
-};
-
-class Triangle_C606060 : public Triangle_common
-{
-public:
-    Triangle_C606060(unsigned int side_a) : Triangle_common(side_a, side_a, side_a, 60, 60, 60)
-    {
-        sides_count = 3;
-        name = "Равносторонний треугольник";
-    }
-    bool check() override {
-        if (!Triangle_common::check()) return false;
-        else return true;
-    };
-};
-
-
-
-class Quadrangle_ababABAB : public Quadrangle_common
-{
-public:
-    Quadrangle_ababABAB(unsigned int side_a, unsigned int side_b, unsigned int corner_A, unsigned int corner_B) : Quadrangle_common(side_a, side_b, side_a, side_b, corner_A, corner_B, corner_A, corner_B)
-    {
-        sides_count = 4;
-        name = "Параллелограмм";
-    }
-    bool check() /*override*/ {
-        if (!Quadrangle_common::check() || (side_a == side_b) || (corner_A == corner_B)) return false;
-        else return true;
-    };
-};
-
-class Quadrangle_abab90 : public Quadrangle_ababABAB
-{
-public:
-    Quadrangle_abab90(unsigned int side_a, unsigned int side_b) : Quadrangle_ababABAB(side_a, side_b, 90, 90)
-    {
-        sides_count = 4;
-        name = "Прямоугольник";
-    }
-
-    bool check() /*override*/ {
-        if (!Quadrangle_common::check() || (side_a == side_b)) return false;
-        else return true;
-    };
-};
-
-class Quadrangle_aABAB : public Quadrangle_ababABAB
-{
-public:
-    Quadrangle_aABAB(unsigned int side_a, unsigned int corner_A, unsigned int corner_B) : Quadrangle_ababABAB(side_a, side_a, corner_A, corner_B)
-    {
-        sides_count = 4;
-        name = "Ромб";
-    }
-
-    bool check() /*override*/ {
-        if (!Quadrangle_common::check() || (corner_A == corner_B)) return false;
-        else return true;
-    };
-};
-
-class Quadrangle_a90 : public Quadrangle_aABAB
-{
-public:
-    Quadrangle_a90(unsigned int side_a) : Quadrangle_aABAB(side_a, 90, 90)
-    {
-        sides_count = 4;
-        name = "Квадрат";
-    }
-
-    bool check() /*override*/ {
-        if (!Quadrangle_common::check()) return false;
-        else return true;
-    };
-};
 
 void print_info(Figure* figure) {
     figure->print_info();

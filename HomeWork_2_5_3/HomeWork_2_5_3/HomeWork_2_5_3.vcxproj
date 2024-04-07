@@ -129,12 +129,26 @@
   <ItemGroup>
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="HomeWork_2_5_3.cpp" />
+    <ClCompile Include="Quadrangle_a90.cpp" />
+    <ClCompile Include="Quadrangle_aABAB.cpp" />
+    <ClCompile Include="Quadrangle_abab90.cpp" />
+    <ClCompile Include="Quadrangle_ababABAB.cpp" />
     <ClCompile Include="Quadrangle_common.cpp" />
+    <ClCompile Include="Triangle_acAC.cpp" />
+    <ClCompile Include="Triangle_C606060.cpp" />
+    <ClCompile Include="Triangle_C90.cpp" />
     <ClCompile Include="Triangle_common.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Figure.h" />
+    <ClInclude Include="Quadrangle_a90.h" />
+    <ClInclude Include="Quadrangle_aABAB.h" />
+    <ClInclude Include="Quadrangle_abab90.h" />
+    <ClInclude Include="Quadrangle_ababABAB.h" />
     <ClInclude Include="Quadrangle_common.h" />
+    <ClInclude Include="Triangle_acAC.h" />
+    <ClInclude Include="Triangle_C606060.h" />
+    <ClInclude Include="Triangle_C90.h" />
     <ClInclude Include="Triangle_common.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

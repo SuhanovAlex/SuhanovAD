@@ -22,9 +22,9 @@ public:
     unsigned int get_corner_C();
     unsigned int get_corner_D();
 
-    /*virtual*/ bool check();
+    virtual bool check();
 
-    void print_info() /*override*/;
+    void print_info() override;
     Quadrangle_common();
     Quadrangle_common(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 };
